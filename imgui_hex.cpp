@@ -548,6 +548,20 @@ bool ImGui::BeginHexEditor(const char* str_id, ImGuiHexEditorState* state, const
 				}
 			}
 		}
+
+		if ( hex_key_pressed == ImGuiKey_None )
+		{
+			int diff = ImGuiKey_Keypad0 - ImGuiKey_0;
+
+			for ( ImGuiKey key = ImGuiKey_Keypad0; key != ImGuiKey_KeypadDecimal; key = (ImGuiKey)( (int)key + 1 ) )
+			{
+				if ( ImGui::IsKeyPressed( key ) )
+				{
+					hex_key_pressed = (ImGuiKey)( key - diff );
+					break;
+				}
+			}
+		}
 	}
 
 	unsigned char stack_line_buf[128];
